@@ -1,0 +1,33 @@
+
+main {
+    margin: auto;
+    width: 50%;
+    border: 1px solid #000;
+    padding: 10px;   
+}
+
+header {
+    text-align: center;
+    font-family: sans-serif;
+}
+
+section {
+    display: flex;
+    justify-content: space-between;
+    gap: 1ch;
+    flex-wrap: wrap;
+
+}
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+
+
+.set-flex-column {
+    display: flex;
+    flex-direction: column;
+}
