@@ -1,3 +1,4 @@
+// ===== State =====
 const names = [
 	"Aaran",
  	"Abaan",
@@ -94,62 +95,62 @@ const prices = [
 	100
 ];
 
-const listOfoccupations = [
-	{
-		name: "Alice",
-		occupation: "Writer",
-		price: 30
-	},
-	{
-		name: "Bob",
-		occupation: "Teacher",
-		price: 50
-	},
-	{
-		name: "Carol",
-		occupation: "Programmer",
-		price: 70
-	}
-];
+const freelancersArr = [
+    { name: "Dr. Slice", price: 25, occupation: "gardener" },
+    { name: "Dr. Pressure", price: 51, occupation: "programmer" },
+    { name: "Prof. Possibility", price: 43, occupation: "teacher" },
+    { name: "Prof. Prism", price: 81, occupation: "teacher" },
+    { name: "Dr. Impulse", price: 43, occupation: "teacher" },
+    { name: "Prof. Spark", price: 76, occupation: "programmer" },
+    { name: "Dr. Wire", price: 47, occupation: "teacher" },
+    { name: "Prof. Goose", price: 72, occupation: "driver" },
+  ];
+  
+let averagePrice = 0;
 
-function addNewName() {
-	const name = names[Math.floor(Math.random() * names.length)];
-	const occupation = occupations[Math.floor(Math.random() * occupations.length)];
-	const price = prices[Math.floor(Math.random() * occupations.length)];
-	listOfoccupations.push({ name, occupation, price });
+function addFreelancer() {
+    const name = names[Math.floor(Math.random() * names.length)];
+    const occupation = occupations[Math.floor(Math.random() * occupations.length)];    
+    const price = Math.floor(Math.random() * (100 - 20 + 1)) + 20;
+    freelancersArr.push({ name, occupation, price });
 }
 
-function renderOccupations() {
-	const freelancerName = document.querySelector(".freelancer-name");
-	const nameElements = listOfoccupations.map((element) => {
-		const nameElement = document.createElement("li");
-		nameElement.append(element.name);
-		return nameElement;
-	});
-	freelancerName.replaceChildren(...nameElements);
-
-	const freelancerOccupation = document.querySelector(".freelancer-occupation");
-	const occupationElements = listOfoccupations.map((element) => {
-		const occupationElement = document.createElement("li");
-		occupationElement.append(element.occupation);
-		return occupationElement;
-	});
-	freelancerOccupation.replaceChildren(...occupationElements);
-
-	const freelancerPrice = document.querySelector(".freelancer-price");
-	const priceElements = listOfoccupations.map((element) => {
-		const priceElement = document.createElement("li");
-		priceElement.append(element.price);
-		return priceElement;
-	});
-	freelancerPrice.replaceChildren(...priceElements);
+function getAverage() {
+    const total = freelancersArr.reduce((total, freelancer) => total + freelancer.price,0);
+    averagePrice = total/freelancersArr.length;
 }
 
+// ===== Render =====
+function renderFreelancers() {
+    const table = document.querySelector("tbody");
+    const freelancers = freelancersArr.map((freelancer) => {
+        const tr = document.createElement("tr");
+        tr.innerHTML = `
+            <td>${freelancer.name}</td>
+            <td>${freelancer.price}</td>
+            <td>${freelancer.occupation}</td>
+        `;
+        return tr;
+    });
+    table.replaceChildren(...freelancers);
+}
 
+function renderAveragePrice() {
+    const avg = document.querySelector(".avg");
+    avg.textContent = `$${averagePrice.toFixed(2)}`;
+}
 
-setInterval(() => {
-	addNewName();
-	renderOccupations();
+// ===== Script =====
+
+function render() {
+    getAverage();
+    renderFreelancers();
+    renderAveragePrice();
+}
+render();
+
+const freelancer = setInterval(() => {
+    addFreelancer();
+    getAverage();
+    render();
 }, 1000);
-
-renderOccupations();
