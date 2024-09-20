@@ -83,18 +83,6 @@ const occupations = [
     "Programmer"
 ];
 
-const prices = [
-	20,
-	30,
-	40,
-	50,
-	60,
-	70,
-	80,
-	90,
-	100
-];
-
 const freelancersArr = [
     { name: "Dr. Slice", price: 25, occupation: "gardener" },
     { name: "Dr. Pressure", price: 51, occupation: "programmer" },
